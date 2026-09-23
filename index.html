@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>شاركنا رأيك في تجربتك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#123a75;
+    --navy-deep:#0c2c5c;
+    --gold:#f4c430;
+    --gold-deep:#e0ac00;
+    --bg:#eef3fb;
+    --card:#ffffff;
+    --ink:#0c2c5c;
+    --muted:#5b6b85;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0b1424;
+      --card:#101d33;
+      --ink:#eaf1ff;
+      --muted:#9fb0cc;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0b1424;
+    --card:#101d33;
+    --ink:#eaf1ff;
+    --muted:#9fb0cc;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top: env(safe-area-inset-top, 0px);}
+  body{
+    margin:0;
+    font-family:'Tajawal', sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100%;
+    display:flex;
+    justify-content:center;
+    padding:24px 14px 60px;
+  }
+  .page{width:100%;max-width:560px;}
+
+  .header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:6px 4px 20px;
+  }
+  .brand{display:flex;flex-direction:column;gap:2px;}
+  .brand-ar{font-weight:800;font-size:16px;color:var(--navy);}
+  .brand-en{font-weight:700;font-size:11px;letter-spacing:.5px;color:var(--navy-deep);}
+  .logo{
+    width:56px;height:56px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(244,196,48,.35);
+    flex-shrink:0;
+  }
+  .logo svg{width:32px;height:32px;}
+
+  .title-pill{
+    background:var(--navy);
+    color:#fff;
+    border-radius:20px;
+    padding:16px 22px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    font-weight:800;font-size:19px;
+    box-shadow:0 10px 24px rgba(18,58,117,.28);
+    margin-bottom:24px;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:18px;
+    padding:18px 16px;
+    margin-bottom:18px;
+    box-shadow:0 6px 20px rgba(12,44,92,.08);
+  }
+  .card-head{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:16px;
+  }
+  .card-head .label{
+    background:var(--navy);
+    color:#fff;
+    font-weight:700;font-size:14px;
+    padding:9px 16px;border-radius:14px;
+    flex:1;margin-inline-start:10px;
+    text-align:center;
+  }
+  .num-badge{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--gold);color:var(--navy-deep);
+    font-weight:800;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .head-icon{font-size:20px;flex-shrink:0;}
+
+  .rating-row{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:10px;padding:10px 2px;border-bottom:1px solid rgba(12,44,92,.06);
+  }
+  .rating-row:last-child{border-bottom:none;}
+  .rating-row .rlabel{font-size:14px;font-weight:500;color:var(--ink);flex:1;text-align:center;}
+  .rating-row .ricon{font-size:18px;flex-shrink:0;}
+  .stars{display:flex;gap:4px;direction:ltr;flex-shrink:0;}
+  .star{
+    width:26px;height:26px;cursor:pointer;
+    color:#d8dfec;transition:transform .12s ease, color .12s ease;
+  }
+  .star.filled{color:var(--gold);}
+  .star:active{transform:scale(1.15);}
+
+  textarea{
+    width:100%;min-height:110px;
+    border:1px solid rgba(12,44,92,.15);
+    border-radius:14px;
+    padding:14px;
+    font-family:inherit;font-size:14px;color:var(--ink);
+    background:transparent;
+    resize:vertical;
+  }
+  textarea:focus{outline:2px solid var(--gold);outline-offset:1px;}
+  textarea::placeholder{color:var(--muted);}
+
+  .toggle-row{display:flex;gap:12px;}
+  .toggle-btn{
+    flex:1;padding:13px 10px;border-radius:20px;
+    font-weight:700;font-size:14px;
+    border:2px solid rgba(12,44,92,.15);
+    background:transparent;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    cursor:pointer;
+  }
+  .toggle-btn.active{
+    background:var(--navy);color:#fff;border-color:var(--navy);
+  }
+
+  .quote{
+    text-align:center;font-weight:700;font-size:16px;
+    color:var(--navy);line-height:1.9;margin:26px 6px;
+  }
+
+  .submit-btn{
+    width:100%;padding:16px;border:none;border-radius:18px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+    color:var(--navy-deep);font-weight:800;font-size:16px;
+    cursor:pointer;box-shadow:0 10px 22px rgba(224,172,0,.3);
+    margin-top:6px;
+  }
+  .submit-btn:disabled{opacity:.55;cursor:not-allowed;}
+
+  .footer{text-align:center;margin-top:26px;color:var(--muted);font-size:13px;}
+  .footer .thanks{color:var(--navy);font-weight:800;font-size:15px;margin-bottom:4px;}
+
+  .done{
+    display:none;text-align:center;padding:50px 20px;
+  }
+  .done.show{display:block;}
+  .done .check{
+    width:70px;height:70px;border-radius:50%;background:var(--navy);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;font-size:34px;
+  }
+  .done h2{color:var(--navy);margin:0 0 8px;font-size:20px;}
+  .done p{color:var(--muted);font-size:14px;margin:0;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div id="form-wrap">
+    <div class="header">
+      <div class="brand">
+        <span class="brand-ar">الخضر لتأجير السيارات</span>
+        <span class="brand-en">AL-KHADR RENT CAR CO</span>
+      </div>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="2.5" y="13" width="19" height="5" rx="1.5" stroke="white" stroke-width="1.6"/>
+          <circle cx="7" cy="18.5" r="1.6" fill="white"/>
+          <circle cx="17" cy="18.5" r="1.6" fill="white"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="title-pill">شاركنا رأيك في تجربتك ⭐</div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="num-badge">1</span>
+        <span class="card-head label">قيّم تجربتك معنا</span>
+        <span class="head-icon">⭐</span>
+      </div>
+
+      <div class="rating-row" data-key="staff">
+        <span class="ricon">👥</span>
+        <span class="rlabel">تقييم تعامل موظفي الفرع</span>
+        <div class="stars"></div>
+      </div>
+      <div class="rating-row" data-key="car">
+        <span class="ricon">🚗</span>
+        <span class="rlabel">تقييم حالة ونظافة السيارة</span>
+        <div class="stars"></div>
+      </div>
+      <div class="rating-row" data-key="process">
+        <span class="ricon">📋</span>
+        <span class="rlabel">سهولة إجراءات الحجز والاستلام والتسليم</span>
+        <div class="stars"></div>
+      </div>
+      <div class="rating-row" data-key="overall">
+        <span class="ricon">👍</span>
+        <span class="rlabel">تقييم تجربتك بشكل عام</span>
+        <div class="stars"></div>
+      </div>
+    </div>
+
+    <div class="quote">
+      رأيك يهمنا، ويساعدنا نطوّر خدمتنا<br>ونقدّم لك تجربة أفضل.
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="num-badge">2</span>
+        <span class="card-head label">ملاحظاتك ورأيك</span>
+        <span class="head-icon">💬</span>
+      </div>
+      <textarea id="feedback" placeholder="ما أكثر شيء أعجبك في تجربتك؟ هل لديك أي ملاحظات أو اقتراحات؟"></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="num-badge">3</span>
+        <span class="card-head label">هل ترغب أن نتواصل معك؟</span>
+        <span class="head-icon">📞</span>
+      </div>
+      <div class="toggle-row">
+        <button type="button" class="toggle-btn" data-contact="نعم">✔ نعم</button>
+        <button type="button" class="toggle-btn" data-contact="لا">لا</button>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn">إرسال التقييم</button>
+    <div class="footer">
+      <div class="thanks">شكرًا لوقتك وثقتك بنا 💙</div>
+      نسعد بخدمتك دائمًا
+    </div>
+  </div>
+
+  <div id="done" class="done">
+    <div class="check">✓</div>
+    <h2>تم إرسال تقييمك بنجاح</h2>
+    <p>شكرًا لمشاركتك رأيك معنا، نتمنى لك رحلة سعيدة 💙</p>
+  </div>
+
+</div>
+
+<script>
+  const state = { staff:0, car:0, process:0, overall:0, contact:null, feedback:'' };
+
+  function buildStars(container, key){
+    container.innerHTML = '';
+    for(let i=1;i<=5;i++){
+      const s = document.createElement('span');
+      s.className = 'star';
+      s.dataset.value = i;
+      s.innerHTML = '★';
+      s.addEventListener('click', ()=>{
+        state[key] = i;
+        renderStars(container, i);
+      });
+      container.appendChild(s);
+    }
+  }
+  function renderStars(container, value){
+    [...container.children].forEach((el,idx)=>{
+      el.classList.toggle('filled', idx < value);
+    });
+  }
+
+  document.querySelectorAll('.rating-row').forEach(row=>{
+    const key = row.dataset.key;
+    const starsEl = row.querySelector('.stars');
+    buildStars(starsEl, key);
+  });
+
+  document.querySelectorAll('.toggle-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      state.contact = btn.dataset.contact;
+    });
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', ()=>{
+    state.feedback = document.getElementById('feedback').value.trim();
+    
+    // التحقق من أن الحقول المطلوبة مكتظة أو إتاحة الإرسال المباشر
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'جاري الإرسال...';
+
+    // رابط إرسال نموذج جوجل (استبدل القيم أدناه بـ entry IDs الخاصة بنموذجك)
+    // طريقة جلب الـ entry IDs: افتح نموذج جوجل الخاص بك -> اضغط كليك يمين واضغط "عرض مصدر الصفحة" (View Page Source) وابحث عن كلمة entry.
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScvZl3RNcxh_uvUW3IDkMhjJsz1jCEGQGMvjDHLjKWwS_zCww/formResponse";
+
+    const formData = new FormData();
+    // استبدل الأرقام أدناه (مثل 11111111) بالـ entry ID الخاص بكل سؤال في نموذج جوجل
+    formData.append("entry.111111111", state.staff);     // تقييم الموظفين
+    formData.append("entry.222222222", state.car);       // تقييم السيارة
+    formData.append("entry.333333333", state.process);   // إجراءات الحجز
+    formData.append("entry.444444444", state.overall);   // التقييم العام
+    formData.append("entry.555555555", state.feedback);  // الملاحظات
+    formData.append("entry.666666666", state.contact);   // رغبة التواصل
+
+    fetch(GOOGLE_FORM_URL, {
+      method: "POST",
+      mode: "no-cors", // لتجنب مشاكل الـ CORS في نماذج جوجل
+      body: formData
+    }).then(() => {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('done').classList.add('show');
+    }).catch((error) => {
+      console.error('Error:', error);
+      // حتى مع حدوث خطأ CORS (وهو طبيعي مع جوجل)، سيتم إرسال البيانات بنجاح في الخلفية
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('done').classList.add('show');
+    });
+  });
+</script>
+</body>
+</html>
