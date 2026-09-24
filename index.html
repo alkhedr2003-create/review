@@ -312,10 +312,12 @@
     const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScvZl3RNcxh_uvUW3IDkMhjJsz1jCEGQGMvjDHLjKWwS_zCww/formResponse";
 
     const formData = new FormData();
-    // مطابقة كافة الأسئلة الأربعة وتقييماتها مع النموذج الأصلي
-    formData.append("entry.158777713", state.overall);   
-    formData.append("entry.59700098", state.staff);      
-    formData.append("entry.838945295", state.feedback);  
+    // تم ربط الأرقام الحقيقية المستخرجة من رابط الـ Pre-fill المباشر
+    formData.append("entry.219694362", state.car);      // تقييم حالة السيارة
+    formData.append("entry.1356103890", state.process);  // إجراءات الحجز
+    formData.append("entry.158777713", state.overall);   // التقييم العام
+    formData.append("entry.59700098", state.staff);      // تقييم الموظفين
+    formData.append("entry.838945295", state.feedback);  // الملاحظات
 
     fetch(GOOGLE_FORM_URL, {
       method: "POST",
