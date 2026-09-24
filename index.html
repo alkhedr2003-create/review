@@ -305,34 +305,27 @@
   document.getElementById('submitBtn').addEventListener('click', ()=>{
     state.feedback = document.getElementById('feedback').value.trim();
     
-    // التحقق من أن الحقول المطلوبة مكتظة أو إتاحة الإرسال المباشر
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.textContent = 'جاري الإرسال...';
 
-    // رابط إرسال نموذج جوجل (استبدل القيم أدناه بـ entry IDs الخاصة بنموذجك)
-    // طريقة جلب الـ entry IDs: افتح نموذج جوجل الخاص بك -> اضغط كليك يمين واضغط "عرض مصدر الصفحة" (View Page Source) وابحث عن كلمة entry.
-    const GOOGLE_FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScvZl3RNcxh_uvUW3IDkMhjJsz1jCEGQGMvjDHLjKWwS_zCww/formResponse";
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScvZl3RNcxh_uvUW3IDkMhjJsz1jCEGQGMvjDHLjKWwS_zCww/formResponse";
 
     const formData = new FormData();
-    // استبدل الأرقام أدناه (مثل 11111111) بالـ entry ID الخاص بكل سؤال في نموذج جوجل
-    formData.append("entry.111111111", state.staff);     // تقييم الموظفين
-    formData.append("entry.222222222", state.car);       // تقييم السيارة
-    formData.append("entry.333333333", state.process);   // إجراءات الحجز
-    formData.append("entry.444444444", state.overall);   // التقييم العام
-    formData.append("entry.555555555", state.feedback);  // الملاحظات
-    formData.append("entry.666666666", state.contact);   // رغبة التواصل
+    // إرسال البيانات للأسئلة الموجودة في النموذج القديم فقط
+    formData.append("entry.158777713", state.overall);   // التقييم العام
+    formData.append("entry.59700098", state.staff);      // تقييم الموظفين
+    formData.append("entry.838945295", state.feedback);  // الملاحظات
 
     fetch(GOOGLE_FORM_URL, {
       method: "POST",
-      mode: "no-cors", // لتجنب مشاكل الـ CORS في نماذج جوجل
+      mode: "no-cors",
       body: formData
     }).then(() => {
       document.getElementById('form-wrap').style.display = 'none';
       document.getElementById('done').classList.add('show');
     }).catch((error) => {
       console.error('Error:', error);
-      // حتى مع حدوث خطأ CORS (وهو طبيعي مع جوجل)، سيتم إرسال البيانات بنجاح في الخلفية
       document.getElementById('form-wrap').style.display = 'none';
       document.getElementById('done').classList.add('show');
     });
