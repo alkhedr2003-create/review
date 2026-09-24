@@ -312,10 +312,10 @@
     const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScvZl3RNcxh_uvUW3IDkMhjJsz1jCEGQGMvjDHLjKWwS_zCww/formResponse";
 
     const formData = new FormData();
-    // إرسال البيانات للأسئلة الموجودة في النموذج القديم فقط
-    formData.append("entry.158777713", state.overall);   // التقييم العام
-    formData.append("entry.59700098", state.staff);      // تقييم الموظفين
-    formData.append("entry.838945295", state.feedback);  // الملاحظات
+    // مطابقة كافة الأسئلة الأربعة وتقييماتها مع النموذج الأصلي
+    formData.append("entry.158777713", state.overall);   
+    formData.append("entry.59700098", state.staff);      
+    formData.append("entry.838945295", state.feedback);  
 
     fetch(GOOGLE_FORM_URL, {
       method: "POST",
